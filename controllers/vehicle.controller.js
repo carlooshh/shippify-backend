@@ -3,10 +3,23 @@ const dbService = require("../config/index");
 
 const getVehicles = async function (values) {
   const con = await dbService.connect();
-
   const vehicles = await vehicleService.getVehicles(con, values);
-  console.log(vehicles);
   con.end();
+  return vehicles;
 };
 
-module.exports = getVehicles;
+const createVehicle = async function (vehicle) {
+  const con = await dbService.connect();
+  const result = await vehicleService.createVehicle(con, vehicle);
+  con.end();
+  return result;
+};
+
+const updateVehicle = async function (id, vehicle) {
+  const con = await dbService.connect();
+  const result = await vehicleService.updateVehicle(con, id, vehicle);
+  con.end();
+  return result;
+};
+
+module.exports = { getVehicles, createVehicle, updateVehicle };

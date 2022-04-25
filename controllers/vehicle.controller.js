@@ -22,4 +22,11 @@ const updateVehicle = async function (id, vehicle) {
   return result;
 };
 
-module.exports = { getVehicles, createVehicle, updateVehicle };
+const deleteVehicle = async function (id) {
+  const con = await dbService.connect();
+  const result = await vehicleService.deleteVehicle(con, id);
+  con.end();
+  return result;
+};
+
+module.exports = { getVehicles, createVehicle, updateVehicle, deleteVehicle };

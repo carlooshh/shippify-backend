@@ -55,4 +55,20 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
+router.delete("/:id", async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const result = await vehicleController.deleteVehicle(id);
+    return res.status(200).json({
+      data: result,
+      message: "Successfully deleted vehicle",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error while deleting vehicle",
+      error: error.message,
+    });
+  }
+});
+
 module.exports = router;

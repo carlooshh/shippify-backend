@@ -52,8 +52,21 @@ const updateVehicle = async function (con, id, vehicle) {
   });
 };
 
+const deleteVehicle = async function (con, id) {
+  const sql = "DELETE FROM vehicle WHERE id = ?";
+  const params = [id];
+
+  return new Promise((resolve, reject) => {
+    con.query(sql, params, function (err, result) {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+};
+
 module.exports = {
   createVehicle,
   getVehicles,
   updateVehicle,
+  deleteVehicle,
 };
